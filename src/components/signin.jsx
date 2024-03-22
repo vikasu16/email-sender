@@ -36,7 +36,7 @@ const signin = () => {
                 <div>
                     <h2 className="text-white font-bold text-2xl p-8">Log In</h2>
                 </div>
-                <div className="bg-white py-12 px-10 shadow sm:rounded-lg sm:px-10 text-center">
+                <div className="bg-white py-10 px-9 shadow sm:rounded-lg sm:px-14 text-center">
                     <h5 className="py-3 text-2xl">Welcome</h5>
                     <h5 className="py-3">Log in to continue to EmailSender.</h5>
                     <button className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-black rounded font-light text-md text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 " onClick = { () => authenicate() }>
