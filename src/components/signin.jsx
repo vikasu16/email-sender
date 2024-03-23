@@ -29,8 +29,9 @@ const signin = () => {
     
     return <>
         <div className="flex bg-black h-screen">
-            <div className="w-full md:w-2/5 bg-black flex justify-center items-center h-screen max-sm:hidden max-md:hidden">
+            <div className="w-full md:w-2/5 bg-black flex flex-col justify-center items-center h-screen max-sm:hidden max-md:hidden">
                 <h1 className="text-4xl font-bold mb-4 text-white">Email Sender</h1>
+                <p className="text-white">Send Email to multiple recipients on single click.</p>
             </div>
             <div className="w-full h-screen md:w-3/5 bg-gray-900 flex flex-col justify-center items-center">
                 <div>
