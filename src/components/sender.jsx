@@ -35,7 +35,7 @@ const sender = () => {
                         <div className='text-base pb-1'>Upload file</div>
                         <div className='flex justify-between'>
                         <input type="file"/>
-                        <button style={{backgroundColor : 'rgb(0, 104, 74)', color:'white'}} className='py-1 px-6 border rounded-2xl'>
+                        <button style={{backgroundColor : 'rgb(0, 104, 74)', color:'white'}} className='py-1 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
                             Upload  
                         </button>
                         </div>
@@ -59,7 +59,7 @@ const sender = () => {
                         <TextEditor/>
                     </div>
                     <div className='text-white pt-5 '>
-                    <button style={{backgroundColor : 'rgb(0, 104, 74)'}} className='py-2 px-6 border rounded-2xl'>
+                    <button style={{backgroundColor : 'rgb(0, 104, 74)'}} className='py-2 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
                         Send Mail
                     </button>
                     </div>
