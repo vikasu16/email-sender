@@ -13,7 +13,7 @@ const sender = () => {
       }, []); 
 
     return <>
-         <div className='p-5 sm:px-20 py-10'>
+         <div className='p-5 sm:pl-10 sm:pr-5 py-10'>
             <div className="border border-grey shadow-md rounded-3xl">
                 <div className='px-10 py-5'>
                     <div className='text-2xl font-bold' style={{color : '#00684A'}}>Create Mail</div>
