@@ -1,15 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import JoditEditor from 'jodit-react';
 
-const TextEditor = () => {
+const TextEditor = (props) => {
 	const editor = useRef(null);
-	const [content, setContent] = useState('');
 
 	return (
 		<JoditEditor className="border rounded-2xl"
 			ref={editor}
-			value={content}
-			onChange={newContent => {setContent(newContent);}}
+			value={props.content}
+			onChange={newContent => {props.onSet(newContent);}}
 		/>
 	);
 };
