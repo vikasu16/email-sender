@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import TextEditor from './editor'
+import { useSender } from '../hooks/emailSender';
 
 
-const sender = () => {
+const sender = (props) => {
     const [check, setCheck] = useState(false);
+    const {content, setRecipients, setSubject, setContent, saveData} = useSender(props.statis, props.setStatis);
 
     useEffect(() => {
         const link = document.querySelector('a.jodit-status-bar-link');
@@ -11,6 +13,10 @@ const sender = () => {
           link.innerHTML = "";
         }
       }, []); 
+
+    const SendMail = () => {
+        saveData();
+    }
 
     return <>
          <div className='p-5 sm:pl-10 sm:pr-5 py-10'>
@@ -35,7 +41,7 @@ const sender = () => {
                         <div className='text-base pb-1'>Upload file</div>
                         <div className='flex justify-between'>
                         <input type="file"/>
-                        <button style={{backgroundColor : 'rgb(0, 104, 74)', color:'white'}} className='py-1 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
+                        <button disabled onClick={SendMail} style={{backgroundColor : 'rgb(0, 104, 74)', color:'white'}} className='cursor-not-allowed py-1 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
                             Upload  
                         </button>
                         </div>
@@ -43,7 +49,8 @@ const sender = () => {
                     :
                     <div>
                         <div className='text-base pb-1'>Recipients</div>
-                        <input className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Recipients'></input>
+                        <input onChange={(e) => setRecipients(e.target.value)} className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Recipients'></input>
+                        <p className='text-sm'>*Enter recipients email seprated with ;</p>
                     </div>
                     }
                 </div>
@@ -51,15 +58,15 @@ const sender = () => {
                 <div style={ {backgroundColor: '#F9FBFA'}} className='p-10'>
                     <div>
                         <div className='text-base pb-1' >Subject</div>
-                        <input className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Subject'></input>
+                        <input onChange={(e) => setSubject(e.target.value)} className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Subject'></input>
                     </div>
                     <br/>
                     <div>
                         <div className='text-base pb-1' >Add Message</div>
-                        <TextEditor/>
+                        <TextEditor content = {content} onSet = {setContent}/>
                     </div>
                     <div className='text-white pt-5 '>
-                    <button style={{backgroundColor : 'rgb(0, 104, 74)'}} className='py-2 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
+                    <button onClick={SendMail} style={{backgroundColor : 'rgb(0, 104, 74)'}} className='py-2 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
                         Send Mail
                     </button>
                     </div>
