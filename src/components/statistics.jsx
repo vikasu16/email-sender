@@ -1,4 +1,5 @@
 import { useStatistics } from "../hooks/emailStatistics";
+import Loader from "./loader";
 
 function Statistics(props)
 {
@@ -15,13 +16,13 @@ function Statistics(props)
                 <div className="border rounded-2xl p-3 mx-2 hover:shadow-md" style={ {backgroundColor: '#F9FBFA'}}>
                     <div className="text-sm pb-3">Total number of mail sent today</div>
                     <div style={{color : '#00684A'}} className="text-5xl flex justify-end">
-                        {loading ? <div>Loading...</div> :  mailDetails.totalMails}
+                        {loading ? <Loader/> :  mailDetails.totalMails}
                     </div>
                 </div>
                 <div className="border rounded-2xl p-3 mx-2 hover:shadow-md" style={ {backgroundColor: '#F9FBFA'}}>
                     <div className="text-sm pb-3">Total template used</div>
                     <div style={{color : '#00684A'}} className="text-5xl flex justify-end ">
-                        {loading ? <div>Loading...</div> : mailDetails.totalTemplates}
+                        {loading ? <Loader/>: mailDetails.totalTemplates}
                     </div>
                 </div>
             </div>

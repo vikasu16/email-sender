@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export const useEmailTemplate = () => {
+export const useEmailTemplate = (tempstate) => {
     const [loading, setLoading] = useState(true);
     const [templates, setTemplates] = useState({ template : [] });
 
     useEffect(() => {
         fetchData(new Date())
-    }, []);
+    }, [tempstate]);
 
     const fetchData = (currentdate) => {
         setLoading(true);
