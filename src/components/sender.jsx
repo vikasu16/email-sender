@@ -5,7 +5,7 @@ import { useSender } from '../hooks/emailSender';
 
 const sender = (props) => {
     const [check, setCheck] = useState(false);
-    const {content, setRecipients, setSubject, setContent, saveData} = useSender(props.statis, props.setStatis);
+    const {content, subject, recipients, setRecipients, setSubject, setContent, saveData} = useSender(props.statis, props.setStatis, props.tempstate, props.setTempstate);
 
     useEffect(() => {
         const link = document.querySelector('a.jodit-status-bar-link');
@@ -49,7 +49,7 @@ const sender = (props) => {
                     :
                     <div>
                         <div className='text-base pb-1'>Recipients</div>
-                        <input onChange={(e) => setRecipients(e.target.value)} className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Recipients'></input>
+                        <input value={recipients} onChange={(e) => setRecipients(e.target.value)} className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Recipients'></input>
                         <p className='text-sm'>*Enter recipients email seprated with ;</p>
                     </div>
                     }
@@ -58,7 +58,7 @@ const sender = (props) => {
                 <div style={ {backgroundColor: '#F9FBFA'}} className='p-10'>
                     <div>
                         <div className='text-base pb-1' >Subject</div>
-                        <input onChange={(e) => setSubject(e.target.value)} className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Subject'></input>
+                        <input value={subject} onChange={(e) => setSubject(e.target.value)} className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Subject'></input>
                     </div>
                     <br/>
                     <div>

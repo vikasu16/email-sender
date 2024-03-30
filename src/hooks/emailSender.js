@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export const useSender = (statistic , setStatistic) => {
+export const useSender = (statistic , setStatistic, tempstate, setTempstate) => {
     
     const [recipients, setRecipients] = useState('');
     const [subject, setSubject] = useState('');
@@ -29,12 +29,12 @@ export const useSender = (statistic , setStatistic) => {
            })
            if(valid)
            {
-                setStatistic(!statistic)
                 // axios.post('http://127.0.0.1:8787/api/v1/statistic/add', {
                 //     userid : "90b5d03a-2300-478f-8fdf-88972aac6e2d",
                 //     totalrecepits : totalrecepits
                 // }).then(res => {
                 //     console.log("added statistic");
+                //     setStatistic(!statistic)
                 // })
 
                 // axios.post('http://127.0.0.1:8787/api/v1/template/add', {
@@ -43,8 +43,12 @@ export const useSender = (statistic , setStatistic) => {
                 //     content : "dummy content"
                 // }).then(res =>{
                 //     console.log("added template")
+                //     setTempstate(!tempstate)
                 // })
-
+                setContent('');
+                setSubject('');
+                setRecipients('');  
+                alert('email sent');
            }
            else{
                 alert('Email is not valid')
@@ -58,6 +62,8 @@ export const useSender = (statistic , setStatistic) => {
 
     return {
         content,
+        subject,
+        recipients,
         setRecipients,
         setSubject,
         setContent,

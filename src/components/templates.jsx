@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import EmailTemplate from "./emailtemplate";
 import { useEmailTemplate } from "../hooks/emailtemplate";
+import Loader from "./loader";
 
-function Templates({props})
+function Templates(props)
 {
-    const {loading, templates, fetchData} = useEmailTemplate()
+    const {loading, templates, fetchData} = useEmailTemplate(props.tempstate)
     const [currentdate, setCurrentdate] = useState(new Date());
 
     const search = () => {
@@ -27,7 +28,7 @@ function Templates({props})
             <hr/>
             <div className='px-5 py-5'>
                 { loading 
-                ? <div> Loading...</div>
+                ? <Loader/>
                 : templates.template.map((values, index) => {
                   return (<EmailTemplate key={index} subject={values.subject} content = {values.content} />)
                 })}
