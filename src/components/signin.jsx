@@ -10,7 +10,8 @@ provider.addScope("https://mail.google.com/");
 const signin = () => {
     const navigator = useNavigate();
     localStorage.removeItem("_userkey");
-    
+    localStorage.removeItem("_userMail");
+
     const authenicate = () => {
         signInWithPopup(auth, provider)
         .then((result) => {
@@ -19,8 +20,7 @@ const signin = () => {
           const token = credential.accessToken;
           
           const user = result.user;
-          localStorage.setItem('_userkey', token);
-          verifyUser(user.email, user.displayName)
+          verifyUser(user.email, user.displayName, token)
         }).catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -30,13 +30,15 @@ const signin = () => {
         });
      }
      
-    const verifyUser = (oAuthEmail, oAuthName) => {
+    const verifyUser = (oAuthEmail, oAuthName, token) => {
         axios.post('http://127.0.0.1:8787/api/v1/auth/config', {
             email: oAuthEmail,
             name: oAuthName
         }).then(res => { 
             if(res.data.userid)
-            {
+            {       
+                localStorage.setItem('_userkey', token);
+                localStorage.setItem('_userMail', oAuthEmail);
                 navigator('/'+res.data.userid);
             }
             else{
@@ -44,6 +46,7 @@ const signin = () => {
             }
         })
         .catch(error => {
+            console.log(error);
             alert("error while sigin in")
         })
     } 
