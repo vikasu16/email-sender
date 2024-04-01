@@ -28,11 +28,13 @@ function EmailTemplate(props)
 }
 
 const Popup = (props) => {
+    const createMarkup = () => ({ __html: (props.content) });
+
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
         <div className="w-3/5 bg-white p-8 rounded shadow-lg overflow-auto h-2/3">
           <h2 className="text-lg font-bold mb-4">{props.subject}</h2>
-          <p className='overflow-y-auto'>{props.content}</p>
+          <p className='overflow-y-auto' dangerouslySetInnerHTML={createMarkup()}></p>
           <button className="mt-4 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded" onClick={props.onClose}>Close</button>
         </div>
       </div>

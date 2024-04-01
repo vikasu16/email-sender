@@ -5,11 +5,11 @@ import Loader from "./loader";
 
 function Templates(props)
 {
-    const {loading, templates, fetchData} = useEmailTemplate(props.tempstate)
+    const {loading, templates, fetchData} = useEmailTemplate(props.tempstate, props.userid)
     const [currentdate, setCurrentdate] = useState(new Date());
 
     const search = () => {
-        fetchData(currentdate);
+        fetchData(currentdate, props.userid);
     }
 
     return (

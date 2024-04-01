@@ -3,7 +3,7 @@ import Loader from "./loader";
 
 function Statistics(props)
 {
-   const {loading , mailDetails } = useStatistics(props.statis);
+   const {loading , mailDetails } = useStatistics(props.statis, props.userid);
     
     return (
         <div className='p-2 sm:pl-10 sm:pr-5 pt-20 pb-0' style={{fontFamily: '"Euclid Circular A", "Helvetica Neue", Helvetica, Arial, sans-serif'}}>

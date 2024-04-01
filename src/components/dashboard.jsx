@@ -14,8 +14,16 @@ function Dashboard(props)
     const accessToken = localStorage.getItem("_userkey");
     let auth = { token: false };
 
-    if (accessToken !== null && accessToken !== undefined) {
-        auth.token = true;
+    if (accessToken !== null) {
+        const timestampValue = localStorage.getItem("_userkeyTime");
+        if(timestampValue !== null)
+        {
+            const dateParse = new Date(timestampValue);
+            const currentDate = new Date();
+            const differenceMs = currentDate - dateParse;
+            const hours = Math.floor((differenceMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            auth.token = hours >= 1 ? false : true;
+        }
     }
 
     return auth.token 
@@ -24,11 +32,11 @@ function Dashboard(props)
             <Nav/>
             <div className="flex">
                 <div className="w-full md:w-3/5">
-                    <Statistics statis = {statis}/>
-                    <Sender statis = {statis} setStatis = {setStatis} tempstate = {tempstate} setTempstate = {setTempstate}/>
+                    <Statistics statis = {statis} userid = {id}/>
+                    <Sender statis = {statis} setStatis = {setStatis} tempstate = {tempstate} setTempstate = {setTempstate} userid = {id}/>
                 </div>
                 <div className="w-full md:w-2/5 ">
-                    <Templates tempstate = {tempstate}/>
+                    <Templates tempstate = {tempstate} userid = {id}/>
                 </div>
             </div>
         </>
