@@ -11,6 +11,7 @@ const signin = () => {
     const navigator = useNavigate();
     localStorage.removeItem("_userkey");
     localStorage.removeItem("_userMail");
+    localStorage.removeItem("_userkeyTime");
 
     const authenicate = () => {
         signInWithPopup(auth, provider)
@@ -39,6 +40,7 @@ const signin = () => {
             {       
                 localStorage.setItem('_userkey', token);
                 localStorage.setItem('_userMail', oAuthEmail);
+                localStorage.setItem('_userkeyTime', (new Date()).toISOString());
                 navigator('/'+res.data.userid);
             }
             else{

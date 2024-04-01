@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export const useEmailTemplate = (tempstate) => {
+export const useEmailTemplate = (tempstate, userid) => {
     const [loading, setLoading] = useState(true);
     const [templates, setTemplates] = useState({ template : [] });
 
     useEffect(() => {
-        fetchData(new Date())
+        fetchData(new Date(), userid)
     }, [tempstate]);
 
-    const fetchData = (currentdate) => {
+    const fetchData = (currentdate, id) => {
         setLoading(true);
         const year = currentdate.getFullYear(); 
         const month = String(currentdate.getMonth() + 1).padStart(2, '0'); 
@@ -18,7 +18,7 @@ export const useEmailTemplate = (tempstate) => {
         const formattedDate = `${year}-${month}-${day}`;  
 
         axios.post('http://127.0.0.1:8787/api/v1/template/getbydate',  {
-            userid : "90b5d03a-2300-478f-8fdf-88972aac6e2d",
+            userid : id,
             requesteddate : formattedDate.toString()
         }).then(res => {
             setTemplates({...templates, template : res.data.templates });

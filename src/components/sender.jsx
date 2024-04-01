@@ -5,7 +5,7 @@ import { useSender } from '../hooks/emailSender';
 
 const sender = (props) => {
     const [check, setCheck] = useState(false);
-    const {content, subject, recipients, setRecipients, setSubject, setContent, saveData} = useSender(props.statis, props.setStatis, props.tempstate, props.setTempstate);
+    const {loading, content, subject, recipients, setRecipients, setSubject, setContent, saveData} = useSender(props.statis, props.setStatis, props.tempstate, props.setTempstate);
 
     useEffect(() => {
         const link = document.querySelector('a.jodit-status-bar-link');
@@ -15,7 +15,7 @@ const sender = (props) => {
       }, []); 
 
     const SendMail = () => {
-        saveData();
+        saveData(props.userid);
     }
 
     return <>
@@ -66,7 +66,7 @@ const sender = (props) => {
                         <TextEditor content = {content} onSet = {setContent}/>
                     </div>
                     <div className='text-white pt-5 '>
-                    <button onClick={SendMail} style={{backgroundColor : 'rgb(0, 104, 74)'}} className='py-2 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
+                    <button disabled={loading} onClick={SendMail} style={{backgroundColor : 'rgb(0, 104, 74)'}} className='py-2 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
                         Send Mail
                     </button>
                     </div>
