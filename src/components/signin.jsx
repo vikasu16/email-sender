@@ -3,9 +3,10 @@ import { auth } from '../middleware/Auth';
 import GoogleIcon from "../assets/google.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Urls } from "../config";
 
 const provider = new GoogleAuthProvider();
-provider.addScope("https://mail.google.com/");
+provider.addScope(`${Urls.GoogleEmailScope}`);
 
 const signin = () => {
     const navigator = useNavigate();
@@ -32,7 +33,7 @@ const signin = () => {
      }
      
     const verifyUser = (oAuthEmail, oAuthName, token) => {
-        axios.post('http://127.0.0.1:8787/api/v1/auth/config', {
+        axios.post(`${Urls.EmailServer}/api/v1/auth/config`, {
             email: oAuthEmail,
             name: oAuthName
         }).then(res => { 
