@@ -9,7 +9,7 @@ function Statistics(props)
         <div className='p-2 sm:pl-10 sm:pr-5 pt-20 pb-0' style={{fontFamily: '"Euclid Circular A", "Helvetica Neue", Helvetica, Arial, sans-serif'}}>
             <div className="flex flex-col lg:flex-row justify-between px-5">
             <div className="p-5">
-                <div className="font-bold text-4xl" style={{color : '#00684A'}}>Hi Vikas</div>
+                <div className="font-bold text-4xl" style={{color : '#00684A'}}>Hi {localStorage.getItem("_userName") || ""}</div>
                 <div>Are you ready to start?</div>
             </div>
             <div className="flex">
