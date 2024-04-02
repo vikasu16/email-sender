@@ -30,12 +30,12 @@ function Dashboard(props)
     ?  (
         <>
             <Nav/>
-            <div className="flex">
-                <div className="w-full md:w-3/5">
+            <div className="flex flex-col lg:flex-row">
+                <div className="w-full lg:w-3/5">
                     <Statistics statis = {statis} userid = {id}/>
                     <Sender statis = {statis} setStatis = {setStatis} tempstate = {tempstate} setTempstate = {setTempstate} userid = {id}/>
                 </div>
-                <div className="w-full md:w-2/5 ">
+                <div className="w-full lg:w-2/5 ">
                     <Templates tempstate = {tempstate} userid = {id}/>
                 </div>
             </div>
