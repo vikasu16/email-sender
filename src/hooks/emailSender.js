@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { encodeMail } from "../middleware/EmailEncode";
+import { Urls } from "../config";
 
 export const useSender = (statistic , setStatistic, tempstate, setTempstate) => {
     
@@ -49,8 +50,8 @@ export const useSender = (statistic , setStatistic, tempstate, setTempstate) => 
         const currentEmail = localStorage.getItem('_userMail');
         const config = {
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('_userkey'), // Set your authorization token here
-                'Content-Type': 'application/json', // Set the content type as needed
+                'Authorization': 'Bearer ' + localStorage.getItem('_userkey'), 
+                'Content-Type': 'application/json', 
             },
         };
 
@@ -60,19 +61,19 @@ export const useSender = (statistic , setStatistic, tempstate, setTempstate) => 
             if(allRecipients[i].trim().length > 0)
             {
                 const encodedEmail = encodeMail(currentEmail, allRecipients[i].trim().toLocaleLowerCase(), subject, content);
-                await axios.post('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+                await axios.post(`${Urls.GoogleEmailSender}`, {
                     raw : encodedEmail
                     }, config)
                 totalrecepits += 1;
             }
         }
 
-        await axios.post('http://127.0.0.1:8787/api/v1/statistic/add', {
+        await axios.post(`${Urls.EmailServer}/api/v1/statistic/add`, {
                     userid : userid,
                     totalrecepits : totalrecepits
                 });
 
-        await axios.post('http://127.0.0.1:8787/api/v1/template/add', {
+        await axios.post(`${Urls.EmailServer}/api/v1/template/add`, {
                         userid : userid,
                         subject : subject,
                         content : content
