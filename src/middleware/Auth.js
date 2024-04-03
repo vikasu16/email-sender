@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAkSDan4yTRNDxiQJe5-VFhwqz-iiO5vI8",
-  authDomain: "authapplication-1edfc.firebaseapp.com",
-  projectId: "authapplication-1edfc",
-  storageBucket: "authapplication-1edfc.appspot.com",
-  messagingSenderId: "143450948923",
-  appId: "1:143450948923:web:c1ce99298db551c6c2a31e",
-  measurementId: "G-4S9T4TMR2E"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 
