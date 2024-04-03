@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Urls } from "../config";
 
 
 export const useEmailTemplate = (tempstate, userid) => {
@@ -19,7 +18,7 @@ export const useEmailTemplate = (tempstate, userid) => {
 
         const formattedDate = `${year}-${month}-${day}`;  
 
-        axios.post(`${Urls.EmailServer}/api/v1/template/getbydate`,  {
+        axios.post(`${process.env.REACT_APP_API_SERVER}/api/v1/template/getbydate`,  {
             userid : id,
             requesteddate : formattedDate.toString()
         }).then(res => {

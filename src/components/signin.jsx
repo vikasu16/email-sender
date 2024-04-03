@@ -3,16 +3,16 @@ import { auth } from '../middleware/Auth';
 import GoogleIcon from "../assets/google.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Urls } from "../config";
 
 const provider = new GoogleAuthProvider();
-provider.addScope(`${Urls.GoogleEmailScope}`);
+provider.addScope(process.env.REACT_APP_GOOGLE_SCOPE);
 
 const signin = () => {
     const navigator = useNavigate();
     localStorage.removeItem("_userkey");
     localStorage.removeItem("_userMail");
     localStorage.removeItem("_userkeyTime");
+    localStorage.removeItem('_userName');
 
     const authenicate = () => {
         signInWithPopup(auth, provider)
@@ -33,7 +33,7 @@ const signin = () => {
      }
      
     const verifyUser = (oAuthEmail, oAuthName, token) => {
-        axios.post(`${Urls.EmailServer}/api/v1/auth/config`, {
+        axios.post(`${process.env.REACT_APP_API_SERVER}/api/v1/auth/config`, {
             email: oAuthEmail,
             name: oAuthName
         }).then(res => { 
@@ -42,6 +42,7 @@ const signin = () => {
                 localStorage.setItem('_userkey', token);
                 localStorage.setItem('_userMail', oAuthEmail);
                 localStorage.setItem('_userkeyTime', (new Date()).toISOString());
+                localStorage.setItem('_userName', oAuthName);
                 navigator('/'+res.data.userid);
             }
             else{

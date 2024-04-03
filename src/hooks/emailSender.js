@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { encodeMail } from "../middleware/EmailEncode";
-import { Urls } from "../config";
 
 export const useSender = (statistic , setStatistic, tempstate, setTempstate) => {
     
@@ -61,19 +60,19 @@ export const useSender = (statistic , setStatistic, tempstate, setTempstate) => 
             if(allRecipients[i].trim().length > 0)
             {
                 const encodedEmail = encodeMail(currentEmail, allRecipients[i].trim().toLocaleLowerCase(), subject, content);
-                await axios.post(`${Urls.GoogleEmailSender}`, {
+                await axios.post(process.env.REACT_APP_GOOGLE_SERVER, {
                     raw : encodedEmail
                     }, config)
                 totalrecepits += 1;
             }
         }
 
-        await axios.post(`${Urls.EmailServer}/api/v1/statistic/add`, {
+        await axios.post(`${process.env.REACT_APP_API_SERVER}/api/v1/statistic/add`, {
                     userid : userid,
                     totalrecepits : totalrecepits
                 });
 
-        await axios.post(`${Urls.EmailServer}/api/v1/template/add`, {
+        await axios.post(`${process.env.REACT_APP_API_SERVER}/api/v1/template/add`, {
                         userid : userid,
                         subject : subject,
                         content : content

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Urls } from "../config";
 
 export const useStatistics = (stateChange, userid) => {
     const [loading, setLoading] = useState(true);
@@ -14,10 +13,10 @@ export const useStatistics = (stateChange, userid) => {
     const fetchData = () => {
         setLoading(true);
 
-        axios.get(`${Urls.EmailServer}/api/v1/template/${userid}`)
+        axios.get(`${process.env.REACT_APP_API_SERVER}/api/v1/template/${userid}`)
         .then(tempRes => {
 
-            axios.get(`${Urls.EmailServer}/api/v1/statistic/${userid}`)
+            axios.get(`${process.env.REACT_APP_API_SERVER}/api/v1/statistic/${userid}`)
             .then(res => {
                 setMailDetails({...mailDetails, totalTemplates : tempRes.data.totalValue , totalMails : res.data.totalValue})
                 setLoading(false);
