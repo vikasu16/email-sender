@@ -20,7 +20,7 @@ function Templates(props)
             </div>
             <hr/>
             <div className='px-5 py-5'>
-                <div className="flex gap-5">
+                <div className="flex gap-5 justify-between">
                     <input onChange={e => {setCurrentdate(new Date(e.target.value))}} type="date" className='w-full h-9 border border-gray-500 rounded text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent' placeholder='Subject'></input>
                     <button className="border px-3 text-white rounded hover:shadow-md bg-green-700" onClick={search}>Search</button>
                 </div>
