@@ -6,8 +6,15 @@ Content-Type: text/html; charset=UTF-8
 ${content}`;
 
 const encodeToBase64Url = (text) => {
-    const base64 = btoa(text); 
-    const base64Url = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, ''); // Base64url encoding
+    var base64 = undefined
+    try{
+        base64 = btoa(unescape(encodeURIComponent(text))); 
+    }
+    catch(e)
+    {
+        alert("Email body have some issues");
+    }
+    const base64Url = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, ''); 
     return base64Url;
 };
 
