@@ -28,12 +28,17 @@ export const useSender = (statistic , setStatistic, tempstate, setTempstate) => 
            })
            if(valid)
            {
-                await apicalls(userid, allRecipients)
-                 
+                try{
+                    await apicalls(userid, allRecipients) 
+                    alert('email sent');
+                }
+                catch(e)
+                {
+                    alert('error occured while sending mail!!')
+                }
                 setContent('');
                 setSubject('');
                 setRecipients('');  
-                alert('email sent');
            }
            else{
                 alert('Email is not valid')

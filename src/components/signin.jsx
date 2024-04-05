@@ -3,6 +3,8 @@ import { auth } from '../middleware/Auth';
 import GoogleIcon from "../assets/google.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import Loader from "./loader";
 
 const provider = new GoogleAuthProvider();
 provider.addScope(process.env.REACT_APP_GOOGLE_SCOPE);
@@ -13,6 +15,7 @@ const signin = () => {
     localStorage.removeItem("_userMail");
     localStorage.removeItem("_userkeyTime");
     localStorage.removeItem('_userName');
+    const [loading, setLoading] = useState(false);
 
     const authenicate = () => {
         signInWithPopup(auth, provider)
@@ -33,6 +36,7 @@ const signin = () => {
      }
      
     const verifyUser = (oAuthEmail, oAuthName, token) => {
+        setLoading(true);
         axios.post(`${process.env.REACT_APP_API_SERVER}/api/v1/auth/config`, {
             email: oAuthEmail,
             name: oAuthName
@@ -43,18 +47,21 @@ const signin = () => {
                 localStorage.setItem('_userMail', oAuthEmail);
                 localStorage.setItem('_userkeyTime', (new Date()).toISOString());
                 localStorage.setItem('_userName', oAuthName);
+                setLoading(false);
                 navigator('/'+res.data.userid);
             }
             else{
+                setLoading(false);
                 navigator('/');
             }
         })
         .catch(error => {
-            console.log(error);
+            setLoading(false);
             alert("error while sigin in")
         })
     } 
-    return <>
+    return !loading ? 
+    <> 
         <div className="flex bg-black h-screen">
             <div className="w-full md:w-2/5 p-10 bg-gradient-to-r from-[#ebfb9b] via-[#a2f9e9] to-[#e3fbf3] ... flex flex-col justify-center h-screen max-sm:hidden max-md:hidden">
                 <h1 className="text-4xl font-bold mb-4 text-[#0C2657]">Email Sender</h1>
@@ -77,6 +84,8 @@ const signin = () => {
             </div>
         </div>
     </>
+    :
+    <> <div className="flex h-screen justify-center items-center"><Loader/></div> </>
 }
 
 export default signin;
