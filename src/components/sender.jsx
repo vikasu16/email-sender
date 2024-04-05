@@ -67,7 +67,7 @@ const sender = (props) => {
                         <TextEditor content = {content} onSet = {setContent}/>
                     </div>
                     <div className='text-white pt-5 '> 
-                    {!loading ? <div classname="flex justify-start items-start"> <Loader/> </div>:
+                    {loading ? <div classname="flex justify-start items-start"> <Loader/> </div>:
                     <button disabled={loading} onClick={SendMail} style={{backgroundColor : 'rgb(0, 104, 74)'}} className='py-2 px-6 border rounded-2xl hover:ring-2 hover:ring-green-300'>
                         Send Mail
                     </button>
